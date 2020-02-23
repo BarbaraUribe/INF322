@@ -26,6 +26,9 @@ import { customCss } from './style';
 import { getAllCursos } from '../actions/cursos';
 import { ListaCursos } from '../reducers/cursos';
 
+import "weightless/dialog";
+import "weightless/button";
+
 // These are the actions needed by this element.
 import {
   navigate,
@@ -148,7 +151,28 @@ export class MainPage extends connect(store)(LitElement) {
         <div id="content">
             <!-- ACA está la utilización del componente, para pasarle datos usen un punto '.' más
                  el nombre de la variable del componente (public) -->
-            <horario-clases class="component-margin" .cursos="${this._cursos}"></horario-clases>
+            <tabla-guion class="component-margin" .cursos="${this._cursos}"></tabla-guion>
+
+<!-- Aca el ejemplo de modal, lo que faltaba era el click. El codigo es simple,
+     this.shadowRoot.querySelector se utiliza para obtener el modal 'wl-dialog',
+     luego se usa la funcion show de ese componente y luego (asincronicamente)
+     se imprime el resultado por consola. 
+     
+     No es necesario que la funcion sea inline (@click = "() => {}"), pueden 
+     definir comportamientos mas complejos en una funcion como this._openModal 
+     y luego @click="this._openModal" -->
+
+<wl-button id="open-dialog" @click="${() => {this.shadowRoot!.querySelector("#dialog")!.show().then((result:any) => console.log(result))}}">Open</wl-button>
+<wl-dialog id="dialog" fixed backdrop blockscrolling>
+   <h3 slot="header">Hello my friend</h3>
+   <div slot="content">
+        <ramo-paralelo class="component-margin" .cursos="${this._cursos}"></ramo-paralelo>
+   </div>
+   <div slot="footer">
+      <wl-button id="dialog-submit-button">Submit</wl-button>
+   </div>
+</wl-dialog>
+
         </div>
         
         <div id="footer">
