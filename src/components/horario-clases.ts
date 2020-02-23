@@ -18,9 +18,8 @@ import { ListaCursos } from '../reducers/cursos';
 import 'fontawesome-icon';
 import "weightless/dialog"
 import "weightless/button"
-
+import "weightless/icon"
 import './ramo-paralelo';
-
 
 @customElement('horario-clases')
 export class HorarioClases extends connect(store)(LitElement) {
@@ -93,6 +92,7 @@ export class HorarioClases extends connect(store)(LitElement) {
     }
   }
 
+
   protected render() {
     return html`
 <!--<script type="module" src="../../node_modules/list.js">
@@ -105,6 +105,7 @@ new List('asignaturas',
           pagination: true
         });
 </script>-->
+
 <div class="asignaturas">
 <strong>Buscar:</strong> <input type="text" class="search" />
 <h2>Listado de Cursos</h2>
@@ -139,15 +140,24 @@ new List('asignaturas',
             ${item.asignatura}
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-         
-          <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">Open</wl-button>
-         <wl-dialog id="dialog${item.sigla}" fixed backdrop blockscrolling>
-           <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
-        </wl-dialog>
           
+          <wl-button fab id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">
+       
+          +
+
+          </wl-button>
+          
+          <wl-dialog id="dialog${item.sigla}" fixed backdrop blockscrolling >
+            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
+          </wl-dialog>
+       
+          <wl-icon style="--icon-size: 20px;">          
+                    <fontawesome-icon id="${item.id}" prefix="far" name="plus-square" fixed-width> 
+          </wl-icon> 
+      
           </td> 
-        </tr>
-        <tr><td colspan="3"></td></tr>
+          </tr>
+          <tr><td colspan="3"></td></tr>
           `;
         } else {
           return html`

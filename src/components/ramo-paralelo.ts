@@ -116,7 +116,7 @@ export class RamoParalelo extends connect(store)(LitElement) {
   protected render() {
       return html`
         ${this.filter2()}
-        <div id="box" style="width: 100%">
+        <div id="box" style="width: 95%">
             <h3 id="no-margin">Sigla: ${this.cursos.sigla} &nbsp; &nbsp; Asignatura: ${this.cursos.asignatura}
             <span style="float: right">
             <button>
@@ -156,13 +156,15 @@ export class RamoParalelo extends connect(store)(LitElement) {
               ${item.cupos}
             </td>
             <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-            <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.id}">Open</wl-button>
+            <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.id}">
+            Open
+            </wl-button>
             <wl-dialog id="dialog${item.id}" fixed backdrop blockscrolling>
                 <tabla-guion class="component-margin" .horarios="${item.horarios}">
             </wl-dialog>
             <button @click="${this.handleClick}">
-            <fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width>
-            
+
+             <fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width>
 </fontawesome-icon></button>
             </td>
           </tr>
