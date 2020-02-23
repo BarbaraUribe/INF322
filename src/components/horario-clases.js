@@ -77,12 +77,12 @@ let HorarioClases = class HorarioClases extends connect(store)(LitElement) {
         }
     }
     abrir(e) {
-        var cosa = e;
-        console.log(cosa);
+        console.log(e.target.getAttribute('data-args'));
         console.log("ola");
+        var seabre = "#dialog" + e.target.getAttribute('data-args');
         console.log("adios");
-        var dialogo = this.shadowRoot.querySelector("#dialog");
-        var dialogo = this.shadowRoot.querySelector("#dialogIWI131");
+        //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
+        var dialogo = this.shadowRoot.querySelector(seabre);
         console.log(dialogo);
         if (dialogo != null) {
             dialogo.show().then((result) => console.log(result));
@@ -135,7 +135,7 @@ new List('asignaturas',
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
          
-          <wl-button id="open-dialog" @click="${this.abrir(item.sigla)}" ayuda="${item.sigla}">Open</wl-button>
+          <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">Open</wl-button>
          <wl-dialog id="dialog${item.sigla}" fixed backdrop blockscrolling>
            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
         </wl-dialog>

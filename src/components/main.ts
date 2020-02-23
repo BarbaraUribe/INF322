@@ -161,7 +161,7 @@ export class MainPage extends connect(store)(LitElement) {
         <div id="content">
             <!-- ACA está la utilización del componente, para pasarle datos usen un punto '.' más
                  el nombre de la variable del componente (public) -->
-            <tabla-guion class="component-margin" .cursos="${this._cursos}"></tabla-guion>
+            <horario-clases class="component-margin" .cursos="${this._cursos}"></horario-clases>
 
 <!-- Aca el ejemplo de modal, lo que faltaba era el click. El codigo es simple,
      this.shadowRoot.querySelector se utiliza para obtener el modal 'wl-dialog',
@@ -171,17 +171,6 @@ export class MainPage extends connect(store)(LitElement) {
      No es necesario que la funcion sea inline (@click = "() => {}"), pueden 
      definir comportamientos mas complejos en una funcion como this._openModal 
      y luego @click="this._openModal" -->
-
-<wl-button id="open-dialog" @click="${() => {this.shadowRoot!.querySelector("#dialog")!.show().then((result:any) => console.log(result))}}">Open</wl-button>
-<wl-dialog id="dialog" fixed backdrop blockscrolling>
-   <h3 slot="header">Hello my friend</h3>
-   <div slot="content">
-        <ramo-paralelo class="component-margin" .cursos="${this._cursos}"></ramo-paralelo>
-   </div>
-   <div slot="footer">
-      <wl-button id="dialog-submit-button">Submit</wl-button>
-   </div>
-</wl-dialog>
 
         </div>
         

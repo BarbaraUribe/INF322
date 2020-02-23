@@ -26,6 +26,8 @@ import { store } from '../store';
 import { customCss } from './style';
 // Importen sus tipos de datos y funciones
 import { getAllCursos } from '../actions/cursos';
+import "weightless/dialog";
+import "weightless/button";
 // These are the actions needed by this element.
 import { navigate, updateOffline, updateDrawerState } from '../actions/app.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
@@ -145,6 +147,16 @@ let MainPage = class MainPage extends connect(store)(LitElement) {
             <!-- ACA está la utilización del componente, para pasarle datos usen un punto '.' más
                  el nombre de la variable del componente (public) -->
             <horario-clases class="component-margin" .cursos="${this._cursos}"></horario-clases>
+
+<!-- Aca el ejemplo de modal, lo que faltaba era el click. El codigo es simple,
+     this.shadowRoot.querySelector se utiliza para obtener el modal 'wl-dialog',
+     luego se usa la funcion show de ese componente y luego (asincronicamente)
+     se imprime el resultado por consola. 
+     
+     No es necesario que la funcion sea inline (@click = "() => {}"), pueden 
+     definir comportamientos mas complejos en una funcion como this._openModal 
+     y luego @click="this._openModal" -->
+
         </div>
         
         <div id="footer">
