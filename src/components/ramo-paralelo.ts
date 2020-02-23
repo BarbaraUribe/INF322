@@ -99,10 +99,24 @@ export class RamoParalelo extends connect(store)(LitElement) {
       }
   }
 
+    abrir(e : any){
+        console.log(e.target.getAttribute('data-args'));
+        console.log("ola");
+        var seabre = "#dialog" + e.target.getAttribute('data-args');
+        console.log("adios");
+        //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
+        var dialogo = this.shadowRoot!.querySelector(seabre)!;
+        console.log(dialogo);
+        if(dialogo!= null){
+
+            dialogo.show().then((result:any) => console.log(result))
+        }
+    }
+
   protected render() {
       return html`
         ${this.filter2()}
-        <div id="box" style="width: 97%" >
+        <div id="box" style="width: 100%">
             <h3 id="no-margin">Sigla: ${this.cursos.sigla} &nbsp; &nbsp; Asignatura: ${this.cursos.asignatura}
             <span style="float: right">
             <button>
@@ -142,13 +156,16 @@ export class RamoParalelo extends connect(store)(LitElement) {
               ${item.cupos}
             </td>
             <td style="width: 9%; text-align: center; background-color: #f5f3ed">
+            <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.id}">Open</wl-button>
+            <wl-dialog id="dialog${item.id}" fixed backdrop blockscrolling>
+                <tabla-guion class="component-margin" .horarios="${item.horarios}">
+            </wl-dialog>
             <button @click="${this.handleClick}">
             <fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width>
             
 </fontawesome-icon></button>
             </td>
           </tr>
-          <tr><td colspan="4"><tabla-guion class="component-margin" .horarios="${item.horarios}"></tabla-guion></td></tr>
             `;
       })}
         </tbody>
