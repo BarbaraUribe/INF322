@@ -220,9 +220,9 @@ export class TablaGuion extends connect(store)(LitElement) {
 
     protected render() {
         return html`
-        ${this.filter()}
-        ${this.filter_by_paralelo()}
-    <div id="box">
+
+    <div id="box" style="width: 100%">
+    <!--
         <h3 id="no-margin">Paralelo: ${this.id} &nbsp; &nbsp;&nbsp;Profesor: ${this.profesor}
         <button @click="${this.onClick}">
             <fontawesome-icon prefix="far" name="envelope" style="font-size: small" ></fontawesome-icon>
@@ -232,7 +232,7 @@ export class TablaGuion extends connect(store)(LitElement) {
             <fontawesome-icon name="times" style="font-size: small"></fontawesome-icon>
         </button>
         </span>
-        </h3>
+        </h3> -->
         <table>
         
            

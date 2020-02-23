@@ -24,6 +24,9 @@ export class RamoParalelo extends connect(store)(LitElement) {
   public curso : any;
   public paralelos : any;
 
+  protected filter2(){
+    this.paralelos = this.cursos.paralelos;
+  }
   protected filter() {
     Object.keys(this.cursos).map((key) => {
             const item = this.cursos[key];
@@ -98,16 +101,16 @@ export class RamoParalelo extends connect(store)(LitElement) {
 
   protected render() {
       return html`
-        ${this.filter()}
-        <div id="box" >
-            <h3 id="no-margin">Sigla: ${this.sigla} &nbsp; &nbsp; Asignatura: ${this.nombre}
+        ${this.filter2()}
+        <div id="box" style="width: 97%" >
+            <h3 id="no-margin">Sigla: ${this.cursos.sigla} &nbsp; &nbsp; Asignatura: ${this.cursos.asignatura}
             <span style="float: right">
             <button>
                 <fontawesome-icon name="times" style="font-size: small"></fontawesome-icon>
             </button>     
             </h3>
-            <h3 id="no-margin">Créditos: ${this.curso.creditos}</h3>
-      <table style="box-sizing: content-box">
+            <h3 id="no-margin">Créditos: ${this.cursos.creditos}</h3>
+      <table style="width: 100%">
         <tbody>
         <tr>
             <th class="Paralelo" style="text-align: left">
@@ -139,9 +142,13 @@ export class RamoParalelo extends connect(store)(LitElement) {
               ${item.cupos}
             </td>
             <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-            <button @click="${this.handleClick}"><fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width></fontawesome-icon></button>
+            <button @click="${this.handleClick}">
+            <fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width>
+            
+</fontawesome-icon></button>
             </td>
           </tr>
+          <tr><td colspan="4"><tabla-guion class="component-margin" .horarios="${item.horarios}"></tabla-guion></td></tr>
             `;
       })}
         </tbody>

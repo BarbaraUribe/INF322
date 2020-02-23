@@ -37,6 +37,8 @@ import './snack-bar.js';
 import './horario-clases';
 import './tabla-guion';
 import './ramo-paralelo';
+import "weightless/dialog";
+import "weightless/button";
 let MainPage = class MainPage extends connect(store)(LitElement) {
     constructor() {
         super();
@@ -120,6 +122,11 @@ let MainPage = class MainPage extends connect(store)(LitElement) {
             alert('try again!');
         }
     }
+    abrir() {
+        var dialogo = this.shadowRoot.querySelector("#dialog");
+        console.log(dialogo);
+        dialogo.show().then((result) => console.log(result));
+    }
     /* Render se ejecuta cada vez que se modifica una variable marcada como property, OJO: no se verifican las
      * subpropiedades de los objetos, pueden requerir una actualización usando this.requestUpdate();
      * Más info: https://polymer-library.polymer-project.org/3.0/docs/devguide/observers */
@@ -149,6 +156,11 @@ let MainPage = class MainPage extends connect(store)(LitElement) {
         <span id="logInButton" @click="${this._logIn}">
             Click here to try to log in!
         </span>
+        
+        <wl-button id="open-dialog" @click="${this.abrir}">Open</wl-button>
+        <wl-dialog id="dialog" fixed backdrop blockscrolling>
+           hola
+        </wl-dialog>
     </div>`}
     `;
     }

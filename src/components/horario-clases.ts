@@ -8,12 +8,18 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+
+
 import {LitElement, html, css, property, customElement} from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store';
 import { ButtonSharedStyles } from './button-shared-styles';
 import { ListaCursos } from '../reducers/cursos';
 import 'fontawesome-icon';
+import "weightless/dialog"
+import "weightless/button"
+
+import './ramo-paralelo';
 
 
 @customElement('horario-clases')
@@ -67,9 +73,24 @@ export class HorarioClases extends connect(store)(LitElement) {
     var button = e.target;
     if(button.prefix == "far"){
       button.setAttribute("prefix","fas");
-      console.log(e.target.id);
+
     }else{
       button.setAttribute("prefix","far");
+    }
+  }
+
+  abrir(e : any){
+    var cosa = e;
+    console.log(cosa);
+    console.log("ola");
+
+    console.log("adios");
+    var dialogo = this.shadowRoot!.querySelector("#dialog")!;
+    var dialogo = this.shadowRoot!.querySelector("#dialogIWI131")!;
+    console.log(dialogo);
+    if(dialogo!= null){
+
+      dialogo.show().then((result:any) => console.log(result))
     }
   }
 
@@ -102,11 +123,14 @@ new List('asignaturas',
           <strong> Más información </strong>
           </th>
         </tr>
+           
       ${Object.keys(this.cursos).map((key) => {
       const item = this.cursos[key];
       return html`
         ${Object.keys(item.paralelos).map((idies) => {
         if(idies == '0'){
+          var mostrar = true;
+          console.log(mostrar);
           return html`
           <tr>
           <td class="sigla" style="width: 9%; text-align: center; background-color: #f5f3ed">
@@ -116,17 +140,22 @@ new List('asignaturas',
             ${item.asignatura}
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-          <button @click="${this.handleClick}">
-            <fontawesome-icon id="${item.sigla}" prefix="far" name="plus-square" fixed-width></fontawesome-icon>
-          </button>
+         
+          <wl-button id="open-dialog" @click="${this.abrir(item.sigla)}" ayuda="${item.sigla}">Open</wl-button>
+         <wl-dialog id="dialog${item.sigla}" fixed backdrop blockscrolling>
+           <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
+        </wl-dialog>
+          
           </td> 
         </tr>
+        <tr><td colspan="3"></td></tr>
           `;
         } else {
           return html`
           `;
         }
       })}
+        
         `;
     })}
       </tbody>
