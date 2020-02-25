@@ -222,7 +222,7 @@ export class TablaGuion extends connect(store)(LitElement) {
     protected render() {
         return html`
 
-    <div id="box" style="width: 100%;height: 140%">
+    <div id="box" style="width: 100%;height: 125%">
     
         <h3 id="no-margin">Paralelo: ${this.id} &nbsp; &nbsp;&nbsp;Profesor: ${this.profesor}
         <button @click="${this.onClick}">
