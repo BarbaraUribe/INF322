@@ -214,6 +214,7 @@ export class TablaGuion extends connect(store)(LitElement) {
     }
 
     onClick(){
+        console.log(this.correo);
         window.location.href = `mailto:${this.correo}`;
     }
 
