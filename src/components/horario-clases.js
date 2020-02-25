@@ -143,7 +143,7 @@ new List('asignaturas',
 
           </wl-button>
           
-          <wl-dialog id="dialog${item.sigla}" fixed backdrop blockscrolling >
+          <wl-dialog size="large" id="dialog${item.sigla}" fixed backdrop blockscrolling >
             <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
           </wl-dialog>
        

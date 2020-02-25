@@ -53,7 +53,7 @@ export class RamoParalelo extends connect(store)(LitElement) {
         box-sizing: content-box;
         width: 60%;
         height: 50%;
-        border: 1px solid black;
+        border: 0px solid black;
         float: left;
         border-radius: 10px 10px 10px 10px;
         padding: 10px;
@@ -159,7 +159,7 @@ export class RamoParalelo extends connect(store)(LitElement) {
             <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.id}">
             Open
             </wl-button>
-            <wl-dialog id="dialog${item.id}" fixed backdrop blockscrolling>
+            <wl-dialog size="large" id="dialog${item.id}" fixed backdrop blockscrolling>
                 <tabla-guion class="component-margin" .horarios="${item.horarios}">
             </wl-dialog>
             <button @click="${this.handleClick}">
