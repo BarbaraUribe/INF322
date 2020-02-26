@@ -19,28 +19,11 @@ import 'fontawesome-icon';
 export class RamoParalelo extends connect(store)(LitElement) {
   @property({type: Object})
   public cursos: ListaCursos = {};
-  public sigla = "IWI131";
-  public nombre : any;
-  public curso : any;
   public paralelos : any;
 
-  protected filter2(){
+  protected filter(){
     this.paralelos = this.cursos.paralelos;
   }
-  protected filter() {
-    Object.keys(this.cursos).map((key) => {
-            const item = this.cursos[key];
-            if (item.sigla == this.sigla){
-                this.sigla = item.sigla;
-                this.curso = item;
-                this.nombre = item.asignatura;
-                this.paralelos = this.curso.paralelos;
-                console.log(this.curso);
-            }
-    })
-  }
-
-
   static get styles() {
       return [
         ButtonSharedStyles,
@@ -113,15 +96,26 @@ export class RamoParalelo extends connect(store)(LitElement) {
         }
     }
 
+    cerrar(e: any){
+      console.log(e.target.getAttribute('data-args'));
+      var secierra = "#dialog" + e.target.getAttribute('data-args');
+      var dialogo = this.parentElement!.shadowRoot!.querySelector(secierra);
+      console.log(dialogo);
+      if(dialogo != null){
+          console.log("se cerro");
+          dialogo.hide().then((result:any)=>console.log(result))
+      }
+    }
+
   protected render() {
       return html`
-        ${this.filter2()}
+        ${this.filter()}
         <div id="box" style="width: 95%">
             <h3 id="no-margin">Sigla: ${this.cursos.sigla} &nbsp; &nbsp; Asignatura: ${this.cursos.asignatura}
             <span style="float: right">
-            <button>
-                <fontawesome-icon name="times" style="font-size: small"></fontawesome-icon>
-            </button>     
+            <wl-button flat inverted id="dialog-submit-button" @click="${this.cerrar}" data-args="${this.cursos.sigla}">
+                <fontawesome-icon id="dialog${this.cursos.sigla}" @click="${this.cerrar}" data-args="${this.cursos.sigla}" prefix="far" name="calendar-alt" fixed-width>
+            </wl-button>   
             </h3>
             <h3 id="no-margin">Créditos: ${this.cursos.creditos}</h3>
       <table style="width: 100%">

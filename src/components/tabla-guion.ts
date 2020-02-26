@@ -33,36 +33,6 @@ export class TablaGuion extends connect(store)(LitElement) {
     public horarios :any;
     public existe :any;
 
-
-
-    protected filter() {
-        Object.keys(this.cursos).map((key) => {
-            const item = this.cursos[key];
-            if (item.sigla == this.sigla){
-                this.sigla = item.sigla;
-                this.curso = item;
-                this.nombre = item.asignatura;
-                this.paralelos = this.curso.paralelos;
-                console.log("Entró");
-                console.log(this.curso);
-            }
-        })
-    }
-
-    protected filter_by_paralelo() {
-        Object.keys(this.paralelos).map((key) => {
-            const item = this.paralelos[key];
-            if (item.id == this.id){
-                this.id = item.id;
-                this.profesor = item.profesor;
-                this.horarios = item.horarios;
-                this.correo = item.correo;
-                console.log("Entró");
-                console.log(this.curso);
-            }
-        })
-    }
-
     protected getSala(dia :any,bloque :any){
         this.existe = false;
         this.sala = "";
