@@ -79,8 +79,9 @@ export class HorarioClases extends connect(store)(LitElement) {
   }
 
   abrir(e : any){
-    console.log(e.target.getAttribute('data-args'));
+
     console.log("ola");
+    console.log(e.target.getAttribute('data-args'));
     var seabre = "#dialog" + e.target.getAttribute('data-args');
     console.log("adios");
     //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
@@ -119,7 +120,7 @@ new List('asignaturas',
           <th class="Asignatura" style="text-align: left">
             <strong> Asignatura </strong>
           </th>
-          <th class="cupos" style="text-align: left">
+          <th class="Info" style="text-align: center">
           <strong> Más información </strong>
           </th>
         </tr>
@@ -141,9 +142,11 @@ new List('asignaturas',
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
           
-          <wl-button fab id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">
+          <wl-button fab flat inverted id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">
        
-          +
+     
+                    <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}" prefix="far" name="plus-square" fixed-width style="position: relative;z-index: -1"> 
+
 
           </wl-button>
           
@@ -151,9 +154,7 @@ new List('asignaturas',
             <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
           </wl-dialog>
        
-          <wl-icon style="--icon-size: 20px;">          
-                    <fontawesome-icon id="${item.id}" prefix="far" name="plus-square" fixed-width> 
-          </wl-icon> 
+      
       
           </td> 
           </tr>

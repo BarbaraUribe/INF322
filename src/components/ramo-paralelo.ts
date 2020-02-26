@@ -133,10 +133,10 @@ export class RamoParalelo extends connect(store)(LitElement) {
             <th class="Profesor" style="text-align: left">
               <strong> Profesor </strong>
             </th>
-            <th class="Cupos" style="text-align: left">
+            <th class="Cupos" style="text-align: center">
               <strong> Cupos </strong>
             </th>
-            <th style="text-align: left">
+            <th style="text-align: center">
             <strong> Horario </strong>
             </th>
           </tr>
@@ -156,16 +156,12 @@ export class RamoParalelo extends connect(store)(LitElement) {
               ${item.cupos}
             </td>
             <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-            <wl-button id="open-dialog" @click="${this.abrir}" data-args="${item.id}">
-            Open
+            <wl-button flat inverted id="open-dialog" @click="${this.abrir}" data-args="${item.id}">
+                <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${item.id}" prefix="far" name="calendar-alt" fixed-width>
             </wl-button>
             <wl-dialog size="large" id="dialog${item.id}" fixed backdrop blockscrolling>
                 <tabla-guion class="component-margin" .horarios="${item.horarios}" .id="${item.id}" .profesor="${item.profesor}" .correo="${item.correo}">
             </wl-dialog>
-            <button @click="${this.handleClick}">
-
-             <fontawesome-icon id="${item.id}" prefix="far" name="calendar-alt" fixed-width>
-</fontawesome-icon></button>
             </td>
           </tr>
             `;
