@@ -188,9 +188,40 @@ export class TablaGuion extends connect(store)(LitElement) {
         window.location.href = `mailto:${this.correo}`;
     }
 
+    abrir(e : any){
+
+        console.log("ola");
+        console.log(e.target.getAttribute('data-args'));
+        var seabre = "#dialog" + e.target.getAttribute('data-args');
+        console.log("adios");
+        //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
+        var dialogo = this.shadowRoot!.querySelector(seabre)!;
+        console.log(dialogo);
+        if(dialogo!= null){
+
+            dialogo.show().then((result:any) => console.log(result))
+        }
+    }
+
+    cerrar(e: any){
+        console.log(e.target.getAttribute('data-args'));
+        var secierra = "#dialog" + e.target.getAttribute('data-args');
+        var dialogo = this.shadowRoot!.querySelector(secierra);
+        console.log(dialogo);
+        if(dialogo != null){
+            console.log("se cerro");
+            dialogo.hide();
+        }
+    }
 
     protected render() {
         return html`
+
+<wl-button flat inverted id="open-dialog" @click="${this.abrir}" data-args="${this.id}">
+                <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${this.id}" prefix="far" name="calendar-alt" fixed-width>
+            </wl-button>
+            <wl-dialog size="large" id="dialog${this.id}" fixed backdrop blockscrolling>
+                
 
     <div id="box" style="width: 100%;height: 125%">
     
@@ -199,9 +230,9 @@ export class TablaGuion extends connect(store)(LitElement) {
             <fontawesome-icon prefix="far" name="envelope" style="font-size: small" ></fontawesome-icon>
         </button>
         <span style="float: right">
-        <button >
-            <fontawesome-icon name="times" style="font-size: small"></fontawesome-icon>
-        </button>
+        <wl-button flat inverted id="dialog-close" @click="${this.cerrar}" data-args="${this.id}"> 
+                <fontawesome-icon name="times" @click="${this.cerrar}" data-args="${this.id}" style="font-size: small"></fontawesome-icon>   
+        </wl-button>   
         </span>
         </h3> 
         <table>
@@ -491,6 +522,7 @@ export class TablaGuion extends connect(store)(LitElement) {
     </body>
 </table>
 </div> 
+ </wl-dialog>
     `;
 
     }

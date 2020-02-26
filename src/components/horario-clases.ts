@@ -78,20 +78,6 @@ export class HorarioClases extends connect(store)(LitElement) {
     }
   }
 
-  abrir(e : any){
-
-    console.log("ola");
-    console.log(e.target.getAttribute('data-args'));
-    var seabre = "#dialog" + e.target.getAttribute('data-args');
-    console.log("adios");
-    //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
-    var dialogo = this.shadowRoot!.querySelector(seabre)!;
-    console.log(dialogo);
-    if(dialogo!= null){
-
-      dialogo.show().then((result:any) => console.log(result))
-    }
-  }
 
 
   protected render() {
@@ -141,7 +127,7 @@ new List('asignaturas',
             ${item.asignatura}
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-          
+          <!--
           <wl-button fab flat inverted id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">
        
      
@@ -151,9 +137,10 @@ new List('asignaturas',
           </wl-button>
           
           <wl-dialog size="large" id="dialog${item.sigla}" fixed backdrop blockscrolling >
-            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
+            
           </wl-dialog>
-       
+            -->
+            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
       
       
           </td> 

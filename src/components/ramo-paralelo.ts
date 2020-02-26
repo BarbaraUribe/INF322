@@ -99,22 +99,36 @@ export class RamoParalelo extends connect(store)(LitElement) {
     cerrar(e: any){
       console.log(e.target.getAttribute('data-args'));
       var secierra = "#dialog" + e.target.getAttribute('data-args');
-      var dialogo = this.parentElement!.shadowRoot!.querySelector(secierra);
+      var dialogo = this.shadowRoot!.querySelector(secierra);
       console.log(dialogo);
       if(dialogo != null){
           console.log("se cerro");
-          dialogo.hide().then((result:any)=>console.log(result))
+          dialogo.hide();
       }
     }
 
   protected render() {
       return html`
         ${this.filter()}
+        
+        <wl-button fab flat inverted id="open-dialog" @click="${this.abrir}" data-args="${this.cursos.sigla}">
+       
+     
+                    <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${this.cursos.sigla}" prefix="far" name="plus-square" fixed-width style="position: relative;z-index: -1"> 
+
+
+          </wl-button>
+          
+          <wl-dialog size="large" id="dialog${this.cursos.sigla}" fixed backdrop blockscrolling >
+            
+          
+        
+        
         <div id="box" style="width: 95%">
             <h3 id="no-margin">Sigla: ${this.cursos.sigla} &nbsp; &nbsp; Asignatura: ${this.cursos.asignatura}
             <span style="float: right">
-            <wl-button flat inverted id="dialog-submit-button" @click="${this.cerrar}" data-args="${this.cursos.sigla}">
-                <fontawesome-icon id="dialog${this.cursos.sigla}" @click="${this.cerrar}" data-args="${this.cursos.sigla}" prefix="far" name="calendar-alt" fixed-width>
+            <wl-button flat inverted id="dialog-close" @click="${this.cerrar}" data-args="${this.cursos.sigla}"> 
+                <fontawesome-icon name="times" @click="${this.cerrar}" data-args="${this.cursos.sigla}" style="font-size: small"></fontawesome-icon>   
             </wl-button>   
             </h3>
             <h3 id="no-margin">Créditos: ${this.cursos.creditos}</h3>
@@ -150,12 +164,7 @@ export class RamoParalelo extends connect(store)(LitElement) {
               ${item.cupos}
             </td>
             <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-            <wl-button flat inverted id="open-dialog" @click="${this.abrir}" data-args="${item.id}">
-                <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${item.id}" prefix="far" name="calendar-alt" fixed-width>
-            </wl-button>
-            <wl-dialog size="large" id="dialog${item.id}" fixed backdrop blockscrolling>
                 <tabla-guion class="component-margin" .horarios="${item.horarios}" .id="${item.id}" .profesor="${item.profesor}" .correo="${item.correo}">
-            </wl-dialog>
             </td>
           </tr>
             `;
@@ -164,6 +173,7 @@ export class RamoParalelo extends connect(store)(LitElement) {
         </table>
       
         </div>
+        </wl-dialog>
       `;
 
     }
