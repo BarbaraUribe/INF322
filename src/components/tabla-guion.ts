@@ -21,9 +21,6 @@ import 'fontawesome-icon';
 export class TablaGuion extends connect(store)(LitElement) {
     @property({type: Object})
     public cursos: ListaCursos = {};
-    public sigla = "IWI131";
-    public nombre : any;
-    public curso : any ;
     public paralelos : any ;
     public sala :any;
 
@@ -42,7 +39,6 @@ export class TablaGuion extends connect(store)(LitElement) {
                 console.log(item.sala);
                 this.sala = item.sala;
                 this.existe = true;
-                //return item.sala;
             }
         })
     }
@@ -174,31 +170,15 @@ export class TablaGuion extends connect(store)(LitElement) {
     }
 
 
-    handleClick(e : any) {
-        var button = e.target;
-        if(button.prefix == "far"){
-            button.setAttribute("prefix","fas");
-        }else{
-            button.setAttribute("prefix","far");
-        }
-    }
-
     onClick(){
         console.log(this.correo);
         window.location.href = `mailto:${this.correo}`;
     }
 
     abrir(e : any){
-
-        console.log("ola");
-        console.log(e.target.getAttribute('data-args'));
         var seabre = "#dialog" + e.target.getAttribute('data-args');
-        console.log("adios");
-        //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
         var dialogo = this.shadowRoot!.querySelector(seabre)!;
-        console.log(dialogo);
         if(dialogo!= null){
-
             dialogo.show().then((result:any) => console.log(result))
         }
     }

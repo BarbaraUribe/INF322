@@ -68,17 +68,6 @@ export class HorarioClases extends connect(store)(LitElement) {
     ];
   }
 
-  handleClick(e : any) {
-    var button = e.target;
-    if(button.prefix == "far"){
-      button.setAttribute("prefix","fas");
-
-    }else{
-      button.setAttribute("prefix","far");
-    }
-  }
-
-
 
   protected render() {
     return html`
@@ -116,8 +105,6 @@ new List('asignaturas',
       return html`
         ${Object.keys(item.paralelos).map((idies) => {
         if(idies == '0'){
-          var mostrar = true;
-          console.log(mostrar);
           return html`
           <tr>
           <td class="sigla" style="width: 9%; text-align: center; background-color: #f5f3ed">
@@ -127,22 +114,7 @@ new List('asignaturas',
             ${item.asignatura}
           </td>
           <td style="width: 9%; text-align: center; background-color: #f5f3ed">
-          <!--
-          <wl-button fab flat inverted id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}">
-       
-     
-                    <fontawesome-icon id="open-dialog" @click="${this.abrir}" data-args="${item.sigla}" prefix="far" name="plus-square" fixed-width style="position: relative;z-index: -1"> 
-
-
-          </wl-button>
-          
-          <wl-dialog size="large" id="dialog${item.sigla}" fixed backdrop blockscrolling >
-            
-          </wl-dialog>
-            -->
-            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>
-      
-      
+            <ramo-paralelo class="component-margin" .cursos="${item}"></ramo-paralelo>     
           </td> 
           </tr>
           <tr><td colspan="3"></td></tr>

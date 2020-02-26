@@ -72,37 +72,18 @@ export class RamoParalelo extends connect(store)(LitElement) {
       ];
   }
 
-  handleClick(e : any) {
-      var button = e.target;
-      if(button.prefix == "far"){
-        button.setAttribute("prefix","fas");
-        console.log(e.target.id);
-      }else{
-        button.setAttribute("prefix","far");
-      }
-  }
-
     abrir(e : any){
-        console.log(e.target.getAttribute('data-args'));
-        console.log("ola");
         var seabre = "#dialog" + e.target.getAttribute('data-args');
-        console.log("adios");
-        //var dialogo = this.shadowRoot!.querySelector("#dialog")!;
         var dialogo = this.shadowRoot!.querySelector(seabre)!;
-        console.log(dialogo);
         if(dialogo!= null){
-
             dialogo.show().then((result:any) => console.log(result))
         }
     }
 
     cerrar(e: any){
-      console.log(e.target.getAttribute('data-args'));
       var secierra = "#dialog" + e.target.getAttribute('data-args');
       var dialogo = this.shadowRoot!.querySelector(secierra);
-      console.log(dialogo);
       if(dialogo != null){
-          console.log("se cerro");
           dialogo.hide();
       }
     }
